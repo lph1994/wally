@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wally Squirrel - Peanuts’ Younger Brother</title>
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Open Sans', sans-serif; background: #FFF5EE; color: #333; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Container */
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+    /* Header */
+    .header { display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; padding: 12px 24px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .logo { display: flex; align-items: center; font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: #E67E22; }
+    .logo img.site-logo { width: 40px; height: 40px; object-fit: contain; margin-right: 10px; }
+    .nav-links { display: flex; gap: 16px; }
+    .nav-links a { font-weight: 600; padding: 8px 14px; font-size: 1rem; border-radius: 8px; transition: background 0.3s; }
+    .nav-links a:hover { background: #FFDAB9; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .social-icons { display: flex; gap: 12px; }
+    .social-icons a img { width: 26px; height: 26px; transition: transform 0.3s; }
+    .social-icons a:hover img { transform: scale(1.2); }
+    .btn-primary { background: #E67E22; color: #fff; padding: 10px 18px; font-size: 1rem; border-radius: 8px; transition: background 0.3s; }
+    .btn-primary:hover { background: #D35400; }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+      margin: 40px 0;
+      background: #FFF;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .hero-text { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .hero-text h1 { font-family: 'Fredoka One', cursive; font-size: 3.2rem; color: #E67E22; margin-bottom: 12px; }
+    .hero-text h2 { font-size: 1.3rem; color: #E67E22; margin-bottom: 16px; }
+    .availability { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-size: 1rem; }
+    .availability span { font-weight: bold; color: #E67E22; }
+    .avail-icon { width: 24px; height: 24px; }
+    .hero-text p { margin-bottom: 24px; font-size: 1.05rem; }
+    .actions { display: flex; gap: 12px; margin-bottom: 20px; }
+    .hero-img img { width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); animation: float 4s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-15px);} }
+
+    /* Sections */
+    section { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 30px; }
+
+    /* About */
+    section#about h2 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; color: #E67E22; margin-bottom: 20px; text-align: center; }
+    section#about p { font-size: 1rem; margin-bottom: 16px; }
+    .about-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 24px; }
+    .about-gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s;padding-bottom: 10px; }
+    .about-gallery img:hover { transform: scale(1.5); }
+
+    /* Roadmap & Tokenomics Headings (match About) */
+    section#roadmap h2,
+    section#tokenomics h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.5rem;
+      color: #E67E22;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Roadmap */
+    .timeline { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 40px 0; }
+    .timeline::before { content: ''; position: absolute; top: 50%; left: 5%; right: 5%; height: 4px; background: #FFDAB9; transform: translateY(-50%); border-radius: 2px; }
+    .timeline-item { position: relative; text-align: center; flex: 1; opacity: 0; transform: translateY(20px); padding: 0 10px; animation: fadeUp 0.6s ease forwards; }
+    .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.5s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.8s; }
+    .timeline-item:nth-child(4) { animation-delay: 1.1s; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .circle { width: 60px; height: 60px; margin: 0 auto 16px; border-radius: 50%; background: linear-gradient(45deg, #FF9A9E, #FAD0C4); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 1.6rem; color: #fff; }
+    .title { font-size: 1.1rem; font-weight: bold; margin-bottom: 0; }
+    .desc { font-size: 1rem; color: #555; line-height: 1.4; }
+    .arrow { font-size: 2rem; color: #FFDAB9; margin: 0 15px; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+    /* Tokenomics */
+    .tokenomics { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+    .chart, .info { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .chart { 
+      flex: 1 1 200px; 
+      text-align: center; 
+      position: relative;
+      overflow: visible;
+      box-shadow: 0 4px 24px 0 #ffb3717a, 0 2px 8px rgba(0,0,0,0.05);
+      animation: chartGlow 2.4s infinite alternate;
+    }
+    @keyframes chartGlow {
+      0% { box-shadow: 0 4px 24px 0 #ffb3717a, 0 2px 8px rgba(0,0,0,0.05);}
+      60% { box-shadow: 0 4px 38px 0 #ff78007a, 0 2px 18px rgba(0,0,0,0.11);}
+      100% { box-shadow: 0 4px 24px 0 #ffb3717a, 0 2px 8px rgba(0,0,0,0.05);}
+    }
+    .chart .burn-flame {
+      position: absolute;
+      top: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.2rem;
+      animation: flameDance 0.85s infinite alternate;
+      filter: drop-shadow(0 0 16px #ff9100);
+      user-select: none;
+      pointer-events: none;
+    }
+    @keyframes flameDance {
+      0% { transform: translateX(-50%) scaleY(1);}
+      100% { transform: translateX(-50%) scaleY(1.12) scaleX(1.03);}
+    }
+    .percent-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.3rem;
+      font-weight: bold;
+      color: #E67E22;
+      background: #fff3e5;
+      border-radius: 16px;
+      padding: 7px 24px;
+      box-shadow: 0 2px 8px #ffdbaf73;
+      animation: percentFlash 2s infinite alternate;
+      z-index: 2;
+    }
+    @keyframes percentFlash {
+      0%,100% { background: #fff3e5; color: #E67E22;}
+      50% { background: #fff1d0; color: #e95404;}
+    }
+    .info { 
+      flex: 2 1 340px; 
+      position: relative;
+      overflow: visible;
+    }
+    .info .burn-info {
+      background: linear-gradient(92deg, #fff7e1 80%, #ffdfa3 100%);
+      border-left: 7px solid #ff9000;
+      border-radius: 11px;
+      padding: 14px 18px 14px 36px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      position: relative;
+      box-shadow: 0 2px 14px #ffb35a18;
+      font-size: 1.06rem;
+      font-weight: 500;
+      animation: burnGlow 2s infinite alternate;
+    }
+    .burn-info .burn-icon {
+      position: absolute;
+      left: 9px;
+      top: 15px;
+      font-size: 1.5rem;
+      animation: flameDance 0.7s infinite alternate;
+      filter: drop-shadow(0 0 10px #ffbe42);
+      user-select: none;
+      pointer-events: none;
+    }
+    @keyframes burnGlow {
+      0%,100% { box-shadow: 0 2px 14px #ffb35a18; }
+      60% { box-shadow: 0 4px 25px #ff9600a0; }
+    }
+    .info ul {
+      margin-top: 12px;
+      margin-bottom: 0;
+      padding-left: 23px;
+      font-size: 1rem;
+      color: #D35400;
+    }
+    .info ul li {
+      margin-bottom: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    /* Footer */
+    footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #777; }
+
+    /* ===== CHỈNH SỬA ===== */
+    /* 1. Margin cho nút Copy Contract */
+    .copy-button {
+      margin-right: 12px;
+    }
+    /* 2. Bo góc & viền cho contract box */
+    .contract-box {
+      display: inline-block;
+      background: #ffffff;
+      border: 2px solid #E67E22;
+      padding: 10px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      color: #333;
+      margin-top: 12px;
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; }
+      .chart, .info { width: 100%; }
+      .tokenomics { flex-direction: column; gap: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <img src="./back up_files/logo.png" alt="Wally Squirrel Logo" class="site-logo" />
+        Wally Squirrel
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#tokenomics">Tokenomics</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="social-icons">
+          <a href="https://t.me/Wally_THECTO" target="_blank"><img src="https://img.icons8.com/color/48/000000/telegram-app.png" alt="Telegram"></a>
+          <a href="https://x.com/Wallysquirrel" target="_blank"><img src="https://img.icons8.com/ios-filled/50/000000/x.png" alt="X"></a>
+          <a href="https://dexscreener.com/solana/6tbfe5m6czkc9xdamxxtm4ebrcszelehezmewyhomm6l9" target="_blank"><img src="./back up_files/dex.jpg" alt="Dexscreener"></a>
+        </div>
+        <a href="https://raydium.io/swap/?inputMint=AFy7FjjKWhQjyebp1dWoJwKUxiPwop9Y7LDFBcPYpump&outputMint=4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R" class="btn-primary" target="_blank">Buy Now</a>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Wally Squirrel</h1>
+        <h2>Peanuts’ younger brother</h2>
+        <div class="availability">
+          <span>Available:</span>
+          <a href="https://coinmarketcap.com/currencies/wally-peanuts-brother/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/coinmarketcap.svg" alt="CoinMarketCap" class="avail-icon"></a>
+          <a href="https://www.coingecko.com/en/coins/wally" target="_blank"><img src="./back up_files/coge.png" alt="CoinGecko" class="avail-icon"></a>
+          <a href="https://raydium.io/swap/?inputMint=AFy7FjjKWhQjyebp1dWoJwKUxiPwop9Y7LDFBcPYpump&outputMint=4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R" target="_blank"><img src="./back up_files/ray.webp" alt="Raydium" class="avail-icon"></a>
+        </div>
+        <p>Wally is Peanuts’ younger brother, and he has enlisted Elon Musk’s help to secure justice for Pnut. We all adore Wally also known as Walnut. He has now joined the American Party to launch a worldwide revolution for squirrels!</p>
+        <div class="actions">
+          <a onclick="copyContractAddress()" class="btn-primary copy-button">Copy Contract</a>
+          <a href="https://raydium.io/swap/?inputMint=AFy7FjjKWhQjyebp1dWoJwKUxiPwop9Y7LDFBcPYpump&outputMint=4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R" class="btn-primary" target="_blank">Buy Now</a>
+        </div>
+        <span class="contract-box" id="contractAddress">AFy7FjjKWhQjyebp1dWoJwKUxiPwop9Y7LDFBcPYpump</span>
+      </div>
+      <div class="hero-img">
+        <img src="./back up_files/dog-emoji.png" alt="Wally" />
+      </div>
+    </div>
+
+    <section id="about">
+      <h2>🐿️ About Peanuts’ brother</h2>
+      <p>🐿️ In the aftermath of the tragic loss of our beloved hero PNUT, his younger brother Wally—raised on a humble farm—has risen to take up his mantle. No longer content to remain in the shadows, Wally has declared a grand crusade: to defend his fellow squirrels and all wildlife from cruelty and neglect.</p>
+      <p>🌍 From sun-drenched fields to towering cityscapes, Wally’s clarion call has reverberated across every state, inspiring millions to stand tall against injustice to the animal kingdom. His fearless spirit and unwavering conviction remind us that true courage often wears the guise of the smallest among us.</p>
+      <p>📢 Wherever Wally travels, an army of compassionate allies gathers at his side—families, activists, community leaders—organizing bold rallies, groundbreaking educational initiatives, and on-the-ground outreach to ensure that every creature’s voice is heard.</p>
+      <div class="about-gallery">
+        <img src="./back up_files/about1.jpg" alt="Wally at the farm" />
+        <img src="./back up_files/about2.jpg" alt="Wally rally" />
+        <img src="./back up_files/about3.jpg" alt="Community event" />
+        <img src="./back up_files/about4.jpg" alt="Educational initiative" />
+        <img src="./back up_files/about5.jpg" alt="Wally with supporters" />
+      </div>
+      <p>💥🌟 Now, joined by visionary partners like Elon Musk, Wally leads the charge to forge “A New America”: a land built on empathy, guardianship of our natural world, and an unbreakable pledge to protect those who cannot speak for themselves. Stand with us—honor PNUT’s legacy and embrace a future where kindness reigns supreme.</p>
+    </section>
+
+    <section id="roadmap">
+      <h2>🗺️ Roadmap</h2>
+      <div class="timeline">
+        <div class="timeline-item"> <div class="circle">🏠</div> <div class="title">Launch</div> <div class="desc">Website & Community Launch</div> </div>
+        <div class="arrow">➡️</div>
+        <div class="timeline-item"> <div class="circle">🤝</div> <div class="title">Community</div> <div class="desc">Takeover by Community</div> </div>
+        <div class="arrow">➡️</div>
+        <div class="timeline-item"> <div class="circle">📈</div> <div class="title">Listing</div> <div class="desc">CoinGecko & CoinMarketCap</div> </div>
+        <div class="arrow">➡️</div>
+        <div class="timeline-item"> <div class="circle">🏦</div> <div class="title">CEX 2025</div> <div class="desc">Centralized Exchange Launch</div> </div>
+      </div>
+    </section>
+
+    <section id="tokenomics">
+      <h2>💰 Tokenomics</h2>
+      <div class="tokenomics">
+        <div class="chart">
+          <canvas id="tokenomicsChart" width="280" height="280"></canvas>
+          <span class="burn-flame" title="Weekly Burn!"></span>
+          <span class="percent-badge">100%</span>
+        </div>
+        <div class="info">
+          <p><strong>Allocation Commitment:</strong></p>
+          <p><strong>100% of tokens allocated entirely to the community.</strong></p>
+          <p>No team, marketing, liquidity, or third-party allocations. Ensuring no pump-and-dump, no price manipulation of Wally Squirrel.</p>
+          <div class="burn-info">
+            <span class="burn-icon"></span>
+            <strong>🔥 Weekly Token Burning:</strong><br>
+            <span>
+              From 2025, a portion of Wally tokens will be burned every week, <b>reducing total supply and boosting holder value!</b>
+              <div>
+                <div>🔥 Reduces circulating supply → increases scarcity</div>
+                <div>🔥 Protects the long-term value for all true supporters</div>
+                <div>🔥 100% transparent, on-chain, and community-notified</div>
+              <div>
+              Join us every week for #WallyBurn events & watch your tokens grow more precious!
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2025 Wally Squirrel. All rights reserved.</footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    new Chart(document.getElementById('tokenomicsChart').getContext('2d'), {
+      type: 'pie',
+      data: { labels: ['Community'], datasets: [{ data: [100], backgroundColor: ['#E67E22'] }] },
+      options: { plugins: { legend: { display: false } } }
+    });
+    function copyContractAddress() {
+      const addr = document.getElementById('contractAddress').innerText;
+      navigator.clipboard.writeText(addr)
+        .then(() => alert('Contract address copied!'))
+        .catch(() => alert('Failed to copy.'));
+    }
+  </script>
+</body>
+</html>
